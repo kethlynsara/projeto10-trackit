@@ -10,6 +10,8 @@ import { useState } from "react/cjs/react.development";
 // import "../Habitos/estilo.css"
 
 function Habitos() {
+  const [semana, setSemana] = useState([]);
+  const [name, setName] = useState("");
   const [etapa, setEtapa] = useState(false);
   const [lista, setLista] = useState([]);
   const { token, setToken, img, setImg } = useContext(UserContext);
@@ -35,23 +37,50 @@ function Habitos() {
     promise.catch((err) => console.log(err.response));
   }, []);
 
+  function enviarHabito() {
+    const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", {
+        name,
+        days: semana
+    }, config);
+      promise.then((response) => {
+        const { data } = response;
+        console.log("post", data);
+      });
+      promise.catch((err) => console.log(err.response));
+  }
+
+  let aux = [...semana];
   function criarHabito() {
     if (etapa) {
       return (
         <Cadastro>
-          <input type="text" placeholder="nome do hábito"></input>
+          <input type="text" placeholder="nome do hábito" value={name} onChange={(e) => setName(e.target.value)}></input>
           <div className="dias">
-            <button>D</button>
-            <button>S</button>
-            <button>T</button>
-            <button>Q</button>
-            <button>Q</button>
-            <button>S</button>
-            <button>S</button>
+            <button onClick={() => {
+                setSemana([...aux, 0])
+                }}>D</button>
+            <button onClick={() => {
+                setSemana([...aux, 1])
+                }}>S</button>
+            <button onClick={() => {
+                setSemana([...aux, 2])
+                }}>T</button>
+            <button onClick={() => {
+                setSemana([...aux, 3])
+                }}>Q</button>
+            <button onClick={() => {
+                setSemana([...aux, 4])
+                }}>Q</button>
+            <button onClick={() => {
+                setSemana([...aux, 5])
+                }}>S</button>
+            <button onClick={() => {
+                setSemana([...aux, 6])
+                }}>S</button>
           </div>
           <div className="salvar-cancelar">
             <button className="cancelar" onClick={() => setEtapa(false)}>Cancelar</button>
-            <button className="salvar">Salvar</button>
+            <button className="salvar" onClick={enviarHabito}>Salvar</button>
           </div>
         </Cadastro>
       );
@@ -60,6 +89,8 @@ function Habitos() {
   }
 
   const criacaoHabitos = criarHabito();
+  console.log("input", name)
+  console.log(semana)
 
   if (lista.length === 0) {
     return (
