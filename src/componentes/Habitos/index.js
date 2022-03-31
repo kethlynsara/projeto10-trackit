@@ -50,7 +50,7 @@ function Habitos() {
             <button>S</button>
           </div>
           <div className="salvar-cancelar">
-            <button className="cancelar">Cancelar</button>
+            <button className="cancelar" onClick={() => setEtapa(false)}>Cancelar</button>
             <button className="salvar">Salvar</button>
           </div>
         </Cadastro>
