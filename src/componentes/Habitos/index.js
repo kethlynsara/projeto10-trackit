@@ -102,6 +102,15 @@ function Habitos() {
     return "";
   }
 
+  function deletar(idHabito) {
+      const confirmacao = window.confirm("Tem certeza que deseja apagar o hábito?");
+      if (confirmacao) {
+        const promise = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${idHabito}`, config);
+        promise.then(() => setStatus(status + 1));
+        promise.catch(() => alert("Não foi possível deletar o seu hábito! Tente novamente."))
+      }
+  }
+
   const criacaoHabitos = criarHabito();
   console.log("input", name)
   console.log(semana)
@@ -136,7 +145,7 @@ function Habitos() {
         {lista.map((item) => {
           return (
             <Habito key={item.name}>
-              <ion-icon name="trash-outline"></ion-icon>
+              <ion-icon name="trash-outline" onClick={() => deletar(item.id)}></ion-icon>
               <p>{item.name}</p>
               <div className="dias">
                 <button>D</button>
