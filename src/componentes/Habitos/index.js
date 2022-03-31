@@ -10,6 +10,7 @@ import { useState } from "react/cjs/react.development";
 // import "../Habitos/estilo.css"
 
 function Habitos() {
+  const [etapa, setEtapa] = useState(false);
   const [lista, setLista] = useState([]);
   const { token, setToken, img, setImg } = useContext(UserContext);
   console.log(img);
@@ -34,6 +35,32 @@ function Habitos() {
     promise.catch((err) => console.log(err.response));
   }, []);
 
+  function criarHabito() {
+    if (etapa) {
+      return (
+        <Cadastro>
+          <input type="text" placeholder="nome do hábito"></input>
+          <div className="dias">
+            <button>D</button>
+            <button>S</button>
+            <button>T</button>
+            <button>Q</button>
+            <button>Q</button>
+            <button>S</button>
+            <button>S</button>
+          </div>
+          <div className="salvar-cancelar">
+            <button className="cancelar">Cancelar</button>
+            <button className="salvar">Salvar</button>
+          </div>
+        </Cadastro>
+      );
+    }
+    return "";
+  }
+
+  const criacaoHabitos = criarHabito();
+
   if (lista.length === 0) {
     return (
       <>
@@ -51,8 +78,16 @@ function Habitos() {
         <Header usuario={img} />
         <Descricao>
           <h2>Meus hábitos</h2>
-          <button>+</button>
+          <button
+            onClick={() => {
+              setEtapa(true);
+              criarHabito();
+            }}
+          >
+            +
+          </button>
         </Descricao>
+        {criacaoHabitos}
         {lista.map((item) => {
           return (
             <Habito key={item.name}>
@@ -181,81 +216,74 @@ const Descricao = styled.div`
   }
 `;
 
-// const Cadastro = styled.div`
-//     width: 340px;
-//     height: 180px;
-//     background-color: brown;
-//     border-radius: 5px;
-//     padding: 18px 18px 15px 19px;
-//     display: flex;
-//     flex-direction: column;
-//     margin-top: 20px;
+const Cadastro = styled.div`
+  width: 340px;
+  height: 180px;
+  border-radius: 5px;
+  /* background-color: salmon; */
+  background-color: #e5e5e5;
+  padding: 18px 18px 15px 19px;
+  margin-top: 20px;
 
-//     input {
-//         width: 303px;
-//         height: 45px;
-//         background: #FFFFFF;
-//         border: 1px solid #D5D5D5;
-//         box-sizing: border-box;
-//         border-radius: 5px;
-//         padding-left: 11px;
-//     }
+  input {
+    width: 303px;
+    height: 45px;
+    border: 1px solid #d5d5d5;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding-left: 11px;
+    border: 1px #d4d4d4;
+  }
 
-//     .dias button {
-//         width: 30px;
-//         height: 30px;
-//         background: #FFFFFF;
-//         border: 1px solid #D5D5D5;
-//         box-sizing: border-box;
-//         border-radius: 5px;
-//         border: none;
-//         margin-top: 8px;
-//         margin-right: 4px;
-//     }
+  input::placeholder {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19.976px;
+    line-height: 25px;
+    color: #dbdbdb;
+  }
 
-//     .salvar-cancelar {
-//         margin-top: 100px;
-//         margin-right: 16px;
+  .dias button {
+    width: 30px;
+    height: 30px;
+    background: #ffffff;
+    border: 1px solid #d5d5d5;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-right: 4px;
+    border: none;
+  }
 
-//         margin-left: 148px;
-//     }
+  .salvar-cancelar {
+    margin-top: 50px;
+    margin-left: 140px;
+  }
 
-//     .salvar-cancelar .salvar {
-//         width: 84px;
-//         height: 35px;
-//         background: #52B6FF;
-//         border-radius: 4.63636px;
-//         border: none;
-//     }
+  .salvar {
+    width: 84px;
+    height: 35px;
+    background: #52b6ff;
+    border-radius: 4.63636px;
+    border: none;
+    margin-left: 23px;
+    font-weight: 400;
+    font-size: 15.976px;
+    line-height: 20px;
+    text-align: center;
+    color: #ffffff;
+  }
 
-//     .salvar-cancelar .cancelar {
-//         width: 69px;
-//         height: 20px;
-//         text-align: center;
-//         color: #52B6FF;
-//         border: none;
-//         background-color: brown;
-//         margin-right: 23px;
-//     }
-// `;
-
-{
-  /* <Cadastro>
-<input type="text" placeholder="nome do hábito"></input>
-<div className="dias">
-    <button>D</button>
-    <button>S</button>
-    <button>T</button>
-    <button>Q</button>
-    <button>Q</button>
-    <button>S</button>
-    <button>S</button>
-</div>
-<div className="salvar-cancelar">
-    <button className="cancelar">Cancelar</button>
-    <button className="salvar">Salvar</button>
-</div>
-</Cadastro> */
-}
+  .cancelar {
+    width: 69px;
+    height: 20px;
+    font-weight: 400;
+    font-size: 15.976px;
+    line-height: 20px;
+    text-align: center;
+    color: #52b6ff;
+    border: none;
+  }
+`;
 
 export default Habitos;
