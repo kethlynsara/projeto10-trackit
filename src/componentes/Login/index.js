@@ -1,10 +1,16 @@
+import axios from "axios";
+import { useContext } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/img/logo.png";
 import { useState } from "react/cjs/react.development";
-import axios from "axios";
+
+import UserContext from "../../contexts/UserContext";
+
+import logo from "../../assets/img/logo.png";
 
 function Login() {
+    const {token, setToken, img, setImg} = useContext(UserContext);
+    // const [img, setImg] = useContext(UserContext);
     const [inputOn, setInputOn] = useState(false);
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
@@ -20,6 +26,9 @@ function Login() {
         promise.then((response) => {
             const { data } = response;
             setInputOn(true);
+            setToken(data.token);
+            setImg(data.image);
+            console.log("token", data.token);
             console.log(data);
             console.log("deu bom");
             navigate("/hoje");

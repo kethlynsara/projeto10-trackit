@@ -4,11 +4,14 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 
 function Footer() {
-    const percentage = 30;
+    const percentage = 66;
     return (
-        <Contanier>
-            <Link to="/habitos"><button>Hábitos</button></Link>
-            <div>
+        <>
+            <Contanier>
+                <StyledLink to="/habitos"><button className="habitos">Hábitos</button></StyledLink>
+                <StyledLink to="/historico"><button className="historico">Histórico</button></StyledLink>
+            </Contanier>
+            <Div>
                 <CircularProgressbar
                     value={percentage}
                     text="Hoje"
@@ -21,22 +24,35 @@ function Footer() {
                         trailColor: "transparent",
                     })}
                 />
-            </div>
-            <Link to="/historico"><button>Histórico</button></Link>
-        </Contanier>
+            </Div>
+        </>
     )
 }
 
+const StyledLink = styled(Link)`
+    margin-bottom: 0px;
+`;
+
+const Div = styled.div`
+    position: fixed;
+    width: 91px;
+    height: 91px;
+    bottom: 6px;
+    left: 142px;
+`;
+
 const Contanier = styled.div`
+    height: 50px;
     font-family: 'Lexend Deca';
     position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
     display: flex;
-    justify-content: space-evenly;
-    padding: 22px 31px 26px 36px;
-    background-color: #FFFFFF;
+    justify-content: space-between;
+    padding: 22px 31px 0px 36px;
+   
+    background-color: #E5E5E5;
     
     button {
         width: 68px;
@@ -51,9 +67,5 @@ const Contanier = styled.div`
         background-color: #FFFFFF;
     }
 
-    div {
-        width: 91px;
-        height: 91px;
-    }
 `;
 export default Footer;

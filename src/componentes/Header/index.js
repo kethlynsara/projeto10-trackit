@@ -1,18 +1,19 @@
 import styled from "styled-components";
-import bob from "../../assets/img/bob.png";
+// import bob from "../../assets/img/bob.png";
 
 
-function Header() {
+function Header({usuario}) {
     return (
         <Headerbox>
             <h1>TrackIt</h1>
-            <img src={bob} alt="bob sponja" />
+            <img src={usuario} alt="foto usuario" />
         </Headerbox>
         
     )
 }
 
 const Headerbox = styled.div` 
+    z-index: 1;
     position: fixed;
     left: 0;
     right: 0;
@@ -30,6 +31,12 @@ const Headerbox = styled.div`
         font-size: 38.982px;
         line-height: 49px;
         color: #FFFFFF;
+    }
+
+    img {
+        width: 51px;
+        height: 51px;
+        border-radius: 98.5px;
     }
 `;
 
