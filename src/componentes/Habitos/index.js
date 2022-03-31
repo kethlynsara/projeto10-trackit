@@ -7,9 +7,9 @@ import UserContext from "../../contexts/UserContext";
 import axios from "axios";
 import { useState } from "react/cjs/react.development";
 
-// import "../Habitos/estilo.css"
-
 function Habitos() {
+  const [status, setStatus] = useState(0);
+  const [enable, setEnable] = useState(false);
   const [semana, setSemana] = useState([]);
   const [name, setName] = useState("");
   const [etapa, setEtapa] = useState(false);
@@ -24,18 +24,20 @@ function Habitos() {
     },
   };
 
-  useEffect(() => {
+  function listarHabitos() {
     const promise = axios.get(
-      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
-      config
-    );
-    promise.then((response) => {
-      const { data } = response;
-      setLista(data);
-      console.log(data);
-    });
-    promise.catch((err) => console.log(err.response));
-  }, []);
+        "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
+        config
+      );
+      promise.then((response) => {
+        const { data } = response;
+        setLista(data);
+        console.log(data);
+      });
+      promise.catch((err) => console.log(err.response));
+  }
+
+  useEffect(() => listarHabitos(), [status]);
 
   function enviarHabito() {
     const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", {
@@ -45,8 +47,17 @@ function Habitos() {
       promise.then((response) => {
         const { data } = response;
         console.log("post", data);
+        setEtapa(false);
+        setName("");
+        setSemana([]);
+        setEnable(false);
+        setStatus(status + 1);
       });
-      promise.catch((err) => console.log(err.response));
+      promise.catch((err) => {
+          console.log(err.response);
+          alert("Não foi possível criar o seu hábito! Tente novamente)");
+          setEnable(false);
+        });
   }
 
   let aux = [...semana];
@@ -54,33 +65,36 @@ function Habitos() {
     if (etapa) {
       return (
         <Cadastro>
-          <input type="text" placeholder="nome do hábito" value={name} onChange={(e) => setName(e.target.value)}></input>
+          <input type="text" placeholder="nome do hábito" disabled={enable} value={name} onChange={(e) => setName(e.target.value)}></input>
           <div className="dias">
             <button onClick={() => {
                 setSemana([...aux, 0])
-                }}>D</button>
+                }} disabled={enable} >D</button>
             <button onClick={() => {
                 setSemana([...aux, 1])
-                }}>S</button>
+                }} disabled={enable} >S</button>
             <button onClick={() => {
                 setSemana([...aux, 2])
-                }}>T</button>
+                }} disabled={enable} >T</button>
             <button onClick={() => {
                 setSemana([...aux, 3])
-                }}>Q</button>
+                }} disabled={enable} >Q</button>
             <button onClick={() => {
                 setSemana([...aux, 4])
-                }}>Q</button>
+                }} disabled={enable}>Q</button>
             <button onClick={() => {
                 setSemana([...aux, 5])
-                }}>S</button>
+                }} disabled={enable}>S</button>
             <button onClick={() => {
                 setSemana([...aux, 6])
-                }}>S</button>
+                }} disabled={enable}>S</button>
           </div>
           <div className="salvar-cancelar">
-            <button className="cancelar" onClick={() => setEtapa(false)}>Cancelar</button>
-            <button className="salvar" onClick={enviarHabito}>Salvar</button>
+            <button className="cancelar" disabled={enable} onClick={() => setEtapa(false)}>Cancelar</button>
+            <button className="salvar" disabled={enable} onClick={() => {
+                enviarHabito();
+                setEnable(true);
+                }}>Salvar</button>
           </div>
         </Cadastro>
       );
@@ -202,6 +216,7 @@ const Contanier = styled.div`
   font-family: "Lexend Deca";
   padding-left: 17px;
   padding-right: 18px;
+  margin-bottom: 100px;
 
   body {
     background-color: #e5e5e5;
