@@ -21,7 +21,7 @@ function Habitos() {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
-    },
+    }
   };
 
   function listarHabitos() {

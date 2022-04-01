@@ -14,8 +14,9 @@ import "../../assets/css/reset.css";
 function App() {
     const [token, setToken] = useState("");
     const [img, setImg] = useState("");
+    const [percentage, setPercentage] = useState(0);
     return (
-        <UserContext.Provider value={{token, setToken, img, setImg}}>
+        <UserContext.Provider value={{token, setToken, img, setImg, percentage, setPercentage}}>
             <BrowserRouter>
                 <main>
                     <Routes>
