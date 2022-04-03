@@ -9,8 +9,11 @@ import check from "../../assets/img/check.svg";
 import UserContext from "../../contexts/UserContext";
 
 function Hoje() {
-  const { token, setToken, img, setImg } = useContext(UserContext);
+  const { token, percentage, setPercentage } = useContext(UserContext);
   const [list, setList] = useState([]);
+  const [selected, setSelected] = useState(true);
+  const [atualizarHabitos, setAtualizarHabitos] = useState(0);
+
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -25,17 +28,52 @@ function Hoje() {
     promise.then((response) => {
       const { data } = response;
       console.log(data);
+      const porcentagem = ((data.filter((habito) => habito.done).length / response.data.length) * 100).toFixed(2);
       setList(data);
+      setPercentage(porcentagem);
+      console.log(porcentagem);
     });
     promise.catch((err) => console.log(err.response));
   }
 
-  useEffect(getHabitos, []);
+  useEffect(getHabitos, [atualizarHabitos]);
+
+  function marcarHabito(id, done) {
+    if (done) {
+      const promise = axios.post(
+        `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`,
+        {},
+        config
+      );
+      promise.then((response) => {
+        const { data } = response;
+        console.log("deu certo", data);
+        setAtualizarHabitos(atualizarHabitos + 1);
+      });
+    } else {
+      const promise = axios.post(
+        `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`,
+        {},
+        config
+      );
+      promise.then((response) => {
+        const { data } = response;
+        console.log("deu bom", data);
+        setAtualizarHabitos(atualizarHabitos + 1);
+
+      });
+    }
+  }
 
   return (
     <>
-      <Header usuario={img} />
+      <Header />
       <Contanier>
+        <h2>
+          {percentage === 0
+            ? "Nenhum hábito concluído ainda"
+            : `${percentage}% dos hábitos concluídos`}
+        </h2>
         {list.map((item) => {
           return (
             <Habito key={item.name}>
@@ -44,7 +82,14 @@ function Hoje() {
                 <h5>Sequência atual: 4 dias</h5>
                 <h6>Seu record: 5 dias</h6>
               </div>
-              <div className="check-box">
+              <div
+                className="check-box"
+                onClick={() => {
+                  setSelected(!selected);
+                  marcarHabito(item.id, item.done);
+                  console.log("selected", selected);
+                }}
+              >
                 <img src={check} alt="check icon" />
               </div>
             </Habito>
@@ -62,6 +107,15 @@ const Contanier = styled.div`
   padding-left: 17px;
   padding-right: 18px;
   margin-bottom: 100px;
+
+  h2 {
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    color: #bababa;
+    margin-top: 127px;
+    margin-bottom: 28px;
+  }
 `;
 
 const Habito = styled.div`
@@ -114,3 +168,54 @@ const Habito = styled.div`
 `;
 
 export default Hoje;
+
+// if (selected) {
+//   if (done === false) {
+//     const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, {}, config);
+//     promise.then((response) => {
+//       const {data} = response;
+//       console.log("deu bom", data);
+//     });
+//     promise.catch((err) => console.log("não deu bom", err.response));
+//     // console.log(setFilter(("filter", list.filter((habito) => habito.done === true))));
+//   } else {
+//     const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, {}, config);
+//     promise.then((response) => {
+//       const {data} = response;
+//       console.log("deu certo", data);
+//     });
+//     promise.catch((err) => console.log("não deu certo", err.response));
+//     // console.log(setFilter(("filter", list.filter((habito) => habito.done === true))));
+//   }
+// } else {
+//   if (done === true) {
+//     const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, {}, config);
+//     promise.then((response) => {
+//       const {data} = response;
+//       console.log("deu certo", data);
+//     });
+//     promise.catch((err) => console.log("não deu certo", err.response));
+//     // console.log(setFilter(("filter", list.filter((habito) => habito.done === true))));
+//   }
+// }
+
+// const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, {}, config);
+// promise.then((response) => {
+// const {data} = response;
+// console.log("deu bom", data);
+// });
+// promise.catch((err) => console.log("não deu bom", err.response));
+// } else if (selected && done) {
+//   const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, {}, config);
+//   promise.then((response) => {
+//   const {data} = response;
+//   console.log("deu certo", data);
+//   });
+//   promise.catch((err) => console.log("não deu certo", err.response));
+// } else if (!selected && done) {
+//   const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, {}, config);
+//   promise.then((response) => {
+//   const {data} = response;
+//   console.log("deu certo", data);
+//   });
+//   promise.catch((err) => console.log("não deu certo", err.response));

@@ -21,43 +21,47 @@ function Habitos() {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
-    }
+    },
   };
 
   function listarHabitos() {
     const promise = axios.get(
-        "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
-        config
-      );
-      promise.then((response) => {
-        const { data } = response;
-        setLista(data);
-        console.log(data);
-      });
-      promise.catch((err) => console.log(err.response));
+      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
+      config
+    );
+    promise.then((response) => {
+      const { data } = response;
+      setLista(data);
+      console.log(data);
+    });
+    promise.catch((err) => console.log(err.response));
   }
 
   useEffect(() => listarHabitos(), [status]);
 
   function enviarHabito() {
-    const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", {
+    const promise = axios.post(
+      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
+      {
         name,
-        days: semana
-    }, config);
-      promise.then((response) => {
-        const { data } = response;
-        console.log("post", data);
-        setEtapa(false);
-        setName("");
-        setSemana([]);
-        setEnable(false);
-        setStatus(status + 1);
-      });
-      promise.catch((err) => {
-          console.log(err.response);
-          alert("Não foi possível criar o seu hábito! Tente novamente)");
-          setEnable(false);
-        });
+        days: semana,
+      },
+      config
+    );
+    promise.then((response) => {
+      const { data } = response;
+      console.log("post", data);
+      setEtapa(false);
+      setName("");
+      setSemana([]);
+      setEnable(false);
+      setStatus(status + 1);
+    });
+    promise.catch((err) => {
+      console.log(err.response);
+      alert("Não foi possível criar o seu hábito! Tente novamente)");
+      setEnable(false);
+    });
   }
 
   let aux = [...semana];
@@ -65,36 +69,89 @@ function Habitos() {
     if (etapa) {
       return (
         <Cadastro>
-          <input type="text" placeholder="nome do hábito" disabled={enable} value={name} onChange={(e) => setName(e.target.value)}></input>
+          <input
+            type="text"
+            placeholder="nome do hábito"
+            disabled={enable}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          ></input>
           <div className="dias">
-            <button onClick={() => {
-                setSemana([...aux, 0])
-                }} disabled={enable} >D</button>
-            <button onClick={() => {
-                setSemana([...aux, 1])
-                }} disabled={enable} >S</button>
-            <button onClick={() => {
-                setSemana([...aux, 2])
-                }} disabled={enable} >T</button>
-            <button onClick={() => {
-                setSemana([...aux, 3])
-                }} disabled={enable} >Q</button>
-            <button onClick={() => {
-                setSemana([...aux, 4])
-                }} disabled={enable}>Q</button>
-            <button onClick={() => {
-                setSemana([...aux, 5])
-                }} disabled={enable}>S</button>
-            <button onClick={() => {
-                setSemana([...aux, 6])
-                }} disabled={enable}>S</button>
+            <button
+              onClick={() => {
+                setSemana([...aux, 0]);
+              }}
+              disabled={enable}
+            >
+              D
+            </button>
+            <button
+              onClick={() => {
+                setSemana([...aux, 1]);
+              }}
+              disabled={enable}
+            >
+              S
+            </button>
+            <button
+              onClick={() => {
+                setSemana([...aux, 2]);
+              }}
+              disabled={enable}
+            >
+              T
+            </button>
+            <button
+              onClick={() => {
+                setSemana([...aux, 3]);
+              }}
+              disabled={enable}
+            >
+              Q
+            </button>
+            <button
+              onClick={() => {
+                setSemana([...aux, 4]);
+              }}
+              disabled={enable}
+            >
+              Q
+            </button>
+            <button
+              onClick={() => {
+                setSemana([...aux, 5]);
+              }}
+              disabled={enable}
+            >
+              S
+            </button>
+            <button
+              onClick={() => {
+                setSemana([...aux, 6]);
+              }}
+              disabled={enable}
+            >
+              S
+            </button>
           </div>
           <div className="salvar-cancelar">
-            <button className="cancelar" disabled={enable} onClick={() => setEtapa(false)}>Cancelar</button>
-            <button className="salvar" disabled={enable} onClick={() => {
+            <button
+              className="cancelar"
+              disabled={enable}
+              onClick={() => setEtapa(false)}
+            >
+              Cancelar
+            </button>
+            <button
+              className="salvar"
+              disabled={enable}
+              onClick={() => {
                 enviarHabito();
                 setEnable(true);
-                }}>Salvar</button>
+              }}
+            >
+              Salvar
+            </button>
           </div>
         </Cadastro>
       );
@@ -103,65 +160,93 @@ function Habitos() {
   }
 
   function deletar(idHabito) {
-      const confirmacao = window.confirm("Tem certeza que deseja apagar o hábito?");
-      if (confirmacao) {
-        const promise = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${idHabito}`, config);
-        promise.then(() => setStatus(status + 1));
-        promise.catch(() => alert("Não foi possível deletar o seu hábito! Tente novamente."))
-      }
+    const confirmacao = window.confirm(
+      "Tem certeza que deseja apagar o hábito?"
+    );
+    if (confirmacao) {
+      const promise = axios.delete(
+        `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${idHabito}`,
+        config
+      );
+      promise.then(() => setStatus(status + 1));
+      promise.catch(() =>
+        alert("Não foi possível deletar o seu hábito! Tente novamente.")
+      );
+    }
   }
 
   const criacaoHabitos = criarHabito();
-  console.log("input", name)
-  console.log(semana)
+  console.log("input", name);
+  console.log(semana);
 
   if (lista.length === 0) {
     return (
       <>
-        <Header />
-        <P>
-          Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
-          começar a trackear!
-        </P>
-        <Footer />
+        <Body>
+          <Header />
+          <Descricao>
+              <h2>Meus hábitos</h2>
+              <button
+                onClick={() => {
+                  setEtapa(true);
+                  criarHabito();
+                }}
+              >
+                +
+              </button>
+            </Descricao>
+            {criacaoHabitos}
+          <P>
+            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
+            começar a trackear!
+          </P>
+          <Footer />
+        </Body>
       </>
     );
   } else {
     return (
-      <Contanier>
-        <Header usuario={img} />
-        <Descricao>
-          <h2>Meus hábitos</h2>
-          <button
-            onClick={() => {
-              setEtapa(true);
-              criarHabito();
-            }}
-          >
-            +
-          </button>
-        </Descricao>
-        {criacaoHabitos}
-        {lista.map((item) => {
-          return (
-            <Habito key={item.name}>
-              <ion-icon name="trash-outline" onClick={() => deletar(item.id)}></ion-icon>
-              <p>{item.name}</p>
-              <div className="dias">
-                <button>D</button>
-                <button>S</button>
-                <button>T</button>
-                <button>Q</button>
-                <button>Q</button>
-                <button>S</button>
-                <button>S</button>
-              </div>
-            </Habito>
-          );
-        })}
+      <>
+        <Body>
+          <Contanier>
+            <Header />
+            <Descricao>
+              <h2>Meus hábitos</h2>
+              <button
+                onClick={() => {
+                  setEtapa(true);
+                  criarHabito();
+                }}
+              >
+                +
+              </button>
+            </Descricao>
+            {criacaoHabitos}
+            {lista.map((item) => {
+              return (
+                <Habito key={item.name}>
+                  <ion-icon
+                    name="trash-outline"
+                    onClick={() => deletar(item.id)}
+                  ></ion-icon>
+                  <p>{item.name}</p>
+                  <div className="dias">
+                    <button>D</button>
+                    <button>S</button>
+                    <button>T</button>
+                    <button>Q</button>
+                    <button>Q</button>
+                    <button>S</button>
+                    <button>S</button>
+                  </div>
+                </Habito>
+              );
+            })}
 
-        <Footer />
-      </Contanier>
+            <Footer />
+          </Contanier>
+        </Body>
+      </>
     );
   }
 }
@@ -185,7 +270,7 @@ const Habito = styled.div`
   width: 340px;
   height: 91px;
   border-radius: 5px;
-  background-color: #e5e5e5;
+  background-color: #ffffff;
   margin-top: 20px;
   position: relative;
   margin-bottom: 10px;
@@ -227,10 +312,6 @@ const Contanier = styled.div`
   padding-right: 18px;
   margin-bottom: 100px;
 
-  body {
-    background-color: #e5e5e5;
-  }
-
   p {
     font-style: normal;
     font-weight: 400;
@@ -248,6 +329,7 @@ const Descricao = styled.div`
   margin-top: 98px;
   display: flex;
   justify-content: space-between;
+  font-family: "Lexend Deca";
 
   h2 {
     font-style: normal;
@@ -340,5 +422,18 @@ const Cadastro = styled.div`
     border: none;
   }
 `;
+
+// const Cabecalho = styled.header`
+//   background-color: #e5e5e5;
+// `;
+
+
+const Body = styled.body`
+  background-color: #e5e5e5;
+`;
+
+// const Base = styled.footer`
+//   background-color: #e5e5e5;
+// `;
 
 export default Habitos;
