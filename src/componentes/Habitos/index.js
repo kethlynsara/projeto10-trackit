@@ -8,6 +8,14 @@ import axios from "axios";
 import { useState } from "react/cjs/react.development";
 
 function Habitos() {
+  const [domingo, setDomingo] = useState(false);
+  const [segunda, setSegunda] = useState(false);
+  const [terca, setTerca] = useState(false);
+  const [quarta, setQuarta] = useState(false);
+  const [quinta, setQuinta] = useState(false);
+  const [sexta, setSexta] = useState(false);
+  const [sabado, setSabado] = useState(false);
+
   const [status, setStatus] = useState(0);
   const [enable, setEnable] = useState(false);
   const [semana, setSemana] = useState([]);
@@ -77,62 +85,112 @@ function Habitos() {
             onChange={(e) => setName(e.target.value)}
           ></input>
           <div className="dias">
-            <button
-              onClick={() => {
-                setSemana([...aux, 0]);
+            <Domingo background={domingo ? "#CFCFCF" : "#ffffff"} color={domingo ? "#ffffff": "#CFCFCF" }
+              onClick={() => {                
+                setDomingo(!domingo);
+                let index = aux.indexOf(0);
+                if (!domingo) {
+                  setSemana([...aux, 0]);
+                } else if (index > -1) {
+                  aux.splice(index, 1);
+                  setSemana(aux);
+                }
               }}
               disabled={enable}
             >
               D
-            </button>
-            <button
+            </Domingo>
+            <Segunda background={segunda ? "#CFCFCF" : "#ffffff"} color={segunda ? "#ffffff": "#CFCFCF" }
               onClick={() => {
-                setSemana([...aux, 1]);
+                setSegunda(!segunda);                
+                let index = aux.indexOf(1);
+
+                if (!segunda) {
+                  setSemana([...aux, 1]);
+                } else if (index > -1) {
+                  aux.splice(index, 1);
+                  setSemana(aux);
+                }
               }}
               disabled={enable}
             >
               S
-            </button>
-            <button
+            </Segunda>
+            <Terca background={terca ? "#CFCFCF" : "#ffffff"} color={terca ? "#ffffff": "#CFCFCF" }
               onClick={() => {
-                setSemana([...aux, 2]);
+                setTerca(!terca);
+                let index = aux.indexOf(2);
+                if (!terca) {
+                  setSemana([...aux, 2]);
+                } else if (index > -1) {
+                  aux.splice(index, 1);
+                  setSemana(aux);
+                }
               }}
               disabled={enable}
             >
               T
-            </button>
-            <button
+            </Terca>
+            <Quarta background={quarta ? "#CFCFCF" : "#ffffff"} color={quarta ? "#ffffff": "#CFCFCF" }
               onClick={() => {
-                setSemana([...aux, 3]);
+                setQuarta(!quarta);
+                let index = aux.indexOf(3);
+                if (!quarta) {
+                  setSemana([...aux, 3]);
+                } else if (index > -1) {
+                  aux.splice(index, 1);
+                  setSemana(aux);
+                }
               }}
               disabled={enable}
             >
               Q
-            </button>
-            <button
+            </Quarta>
+            <Quinta background={quinta ? "#CFCFCF" : "#ffffff"} color={quinta ? "#ffffff": "#CFCFCF" }
               onClick={() => {
-                setSemana([...aux, 4]);
+                setQuinta(!quinta);
+                let index = aux.indexOf(4);
+                if (!quinta) {
+                  setSemana([...aux, 4]);
+                } else if (index > -1) {
+                  aux.splice(index, 1);
+                  setSemana(aux);
+                }
               }}
               disabled={enable}
             >
               Q
-            </button>
-            <button
+            </Quinta>
+            <Sexta background={sexta ? "#CFCFCF" : "#ffffff"} color={sexta ? "#ffffff": "#CFCFCF" }
               onClick={() => {
-                setSemana([...aux, 5]);
+                setSexta(!sexta);
+                let index = aux.indexOf(5);
+                if (!sexta) {
+                  setSemana([...aux, 5]);
+                } else if (index > -1) {
+                  aux.splice(index, 1);
+                  setSemana(aux);
+                }
               }}
               disabled={enable}
             >
               S
-            </button>
-            <button
+            </Sexta>
+            <Sabado background={sabado ? "#CFCFCF" : "#ffffff"} color={sabado ? "#ffffff": "#CFCFCF" }
               onClick={() => {
-                setSemana([...aux, 6]);
+                setSabado(!sabado);
+                let index = aux.indexOf(6);
+                if (!sabado) {
+                  setSemana([...aux, 6]);
+                } else if (index > -1) {
+                  aux.splice(index, 1);
+                  setSemana(aux);
+                }
               }}
               disabled={enable}
             >
               S
-            </button>
+            </Sabado>
           </div>
           <div className="salvar-cancelar">
             <button
@@ -314,7 +372,6 @@ const Contanier = styled.div`
   padding-left: 17px;
   padding-right: 18px;
   margin-bottom: 130px;
-  
 
   p {
     font-style: normal;
@@ -382,6 +439,10 @@ const Cadastro = styled.div`
     line-height: 25px;
     color: #dbdbdb;
   }
+  
+  .dias {
+    display: flex;  
+  }
 
   .dias button {
     width: 30px;
@@ -428,6 +489,115 @@ const Cadastro = styled.div`
     border: none;
     background-color: #ffffff;
   }
+`;
+
+const Domingo = styled.div`
+  background-color: ${(props) => props.background};
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d5d5d5;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: ${(props) => props.color};;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19.976px;
+  line-height: 25px;
+  margin-right: 4px;
+  text-align: center;
+`;
+
+const Segunda = styled.div`
+  background-color: ${(props) => props.background};
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d5d5d5;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: ${(props) => props.color};
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19.976px;
+  line-height: 25px;
+  margin-right: 4px;
+  text-align: center;
+`;
+
+const Terca = styled.div`
+  background-color: ${(props) => props.background};
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d5d5d5;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: ${(props) => props.color};
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19.976px;
+  line-height: 25px;
+  margin-right: 4px;
+  text-align: center;
+`;
+
+const Quarta = styled.div`
+  background-color: ${(props) => props.background};
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d5d5d5;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: ${(props) => props.color};  font-style: normal;
+  font-weight: 400;
+  font-size: 19.976px;
+  line-height: 25px;
+  margin-right: 4px;
+  text-align: center;
+`;
+
+const Quinta = styled.div`
+  background-color: ${(props) => props.background};
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d5d5d5;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: ${(props) => props.color};  font-style: normal;
+  font-weight: 400;
+  font-size: 19.976px;
+  line-height: 25px;
+  margin-right: 4px;
+  text-align: center;
+`;
+
+const Sexta = styled.div`
+  background-color: ${(props) => props.background};
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d5d5d5;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: ${(props) => props.color};  font-style: normal;
+  font-weight: 400;
+  font-size: 19.976px;
+  line-height: 25px;
+  margin-right: 4px;
+  text-align: center;
+`;
+
+const Sabado = styled.div`
+  background-color: ${(props) => props.background};
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d5d5d5;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: ${(props) => props.color};  font-style: normal;
+  font-weight: 400;
+  font-size: 19.976px;
+  line-height: 25px;
+  margin-right: 4px;
+  text-align: center;
+
 `;
 
 const Body = styled.body`
