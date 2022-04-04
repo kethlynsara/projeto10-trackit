@@ -14,7 +14,7 @@ import check from "../../assets/img/check.svg";
 function Hoje() {
   const { token, percentage, setPercentage } = useContext(UserContext);
   const [list, setList] = useState([]);
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState(true);
   const [atualizarHabitos, setAtualizarHabitos] = useState(0);
   const green = "#8FC549";
   const grey = "#BABABA";
@@ -115,7 +115,7 @@ function Hoje() {
                 <h5>Sequência atual: {item.currentSequence === 1 ? `${item.currentSequence} dia` : `${item.currentSequence} dias`}</h5>
                 <h6>Seu record: {item.highestSequence === 1 ? `${item.highestSequence} dia` : `${item.highestSequence} dias`}</h6>
               </div>
-              <CheckBox selected={selected} setSelected={setSelected} marcarHabito={marcarHabito} item={item} green={green} grey={grey}/>
+              <CheckBox selected={selected} setSelected={setSelected} marcarHabito={marcarHabito} item={item} green={green} grey={grey} id={item.id}/>
             </Habito>
           );
         })}

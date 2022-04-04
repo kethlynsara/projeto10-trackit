@@ -1,17 +1,18 @@
 import styled from "styled-components";
 import check from "../../assets/img/check.svg";
 
-function CheckBox({selected, marcarHabito, item, grey, green, setSelected}) {
+function CheckBox({selected, marcarHabito, item, grey, green, setSelected, id}) {
   return (
     <Contanier
-      selecionado={selected ? green : grey}
+      selecionado={item.done ? green : grey}
       onClick={() => {
         setSelected(!selected);
-        marcarHabito(item.id, item.done);
         console.log("selected", selected);
+        marcarHabito(item.id, item.done);
+        
       }}
     >
-      <img src={check} alt="check icon" />
+      <img src={check} alt={`check icon ${id}`} />
     </Contanier>
   );
 }
