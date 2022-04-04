@@ -3,6 +3,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
+import { ThreeDots } from "react-loader-spinner";
 
 import UserContext from "../../contexts/UserContext";
 
@@ -15,8 +16,10 @@ function Login() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const navigate = useNavigate();
+    //const [loading, setLoading] = useState(false);
 
-    function login() {
+    function login(event) {
+        event.preventDefault();
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
         const promise = axios.post(URL, {
                 email,
@@ -41,7 +44,7 @@ function Login() {
             setInputOn(false);  
         });
     }
-
+//!LOADING?
     return (
         <Contanier>
             <img src={logo} alt="logo" />

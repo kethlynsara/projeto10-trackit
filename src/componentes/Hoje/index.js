@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { useState } from "react/cjs/react.development";
 import styled from "styled-components";
 import axios from "axios";
+import dayjs from "dayjs";
 
 import Header from "../Header";
 import Footer from "../Footer";
@@ -13,6 +14,17 @@ function Hoje() {
   const [list, setList] = useState([]);
   const [selected, setSelected] = useState(true);
   const [atualizarHabitos, setAtualizarHabitos] = useState(0);
+  const green = "#8FC549";
+  const grey = "#BABABA";
+  const days = [
+    "Domingo",
+    "Segunda",
+    "Terça",
+    "Quarta",
+    "Quinta",
+    "Sexta",
+    "Sábado",
+  ];
 
   const config = {
     headers: {
@@ -28,7 +40,10 @@ function Hoje() {
     promise.then((response) => {
       const { data } = response;
       console.log(data);
-      const porcentagem = ((data.filter((habito) => habito.done).length / response.data.length) * 100).toFixed(2);
+      const porcentagem = (
+        (data.filter((habito) => habito.done).length / data.length) *
+        100
+      ).toFixed(2);
       setList(data);
       setPercentage(porcentagem);
       console.log(porcentagem);
@@ -60,20 +75,36 @@ function Hoje() {
         const { data } = response;
         console.log("deu bom", data);
         setAtualizarHabitos(atualizarHabitos + 1);
-
       });
     }
+  }
+
+  function diasSemana() {
+    return (
+      <Div>
+        {days.map((day) => {
+          if (days.indexOf(day) == dayjs().day()) {
+            return (
+              <p>
+                {day}, {dayjs().format("DD/MM")}
+              </p>
+            );
+          }
+        })}
+      </Div>
+    );
   }
 
   return (
     <>
       <Header />
       <Contanier>
-        <h2>
-          {percentage === 0
-            ? "Nenhum hábito concluído ainda"
-            : `${percentage}% dos hábitos concluídos`}
-        </h2>
+        {diasSemana()}
+        <H2 color={percentage > 0 ? green : grey}>
+          {percentage > 0
+            ? `${percentage}% dos hábitos concluídos`
+            : "Nenhum hábito concluído ainda"}
+        </H2>
         {list.map((item) => {
           return (
             <Habito key={item.name}>
@@ -107,15 +138,15 @@ const Contanier = styled.div`
   padding-left: 17px;
   padding-right: 18px;
   margin-bottom: 100px;
+`;
 
-  h2 {
-    font-weight: 400;
-    font-size: 17.976px;
-    line-height: 22px;
-    color: #bababa;
-    margin-top: 127px;
-    margin-bottom: 28px;
-  }
+const H2 = styled.h2`
+  font-weight: 400;
+  font-size: 17.976px;
+  line-height: 22px;
+  margin-top: 127px;
+  margin-bottom: 28px;
+  color: ${(props) => props.color};
 `;
 
 const Habito = styled.div`
@@ -165,6 +196,17 @@ const Habito = styled.div`
     height: 28px;
     width: 35.09282684326172px;
   }
+`;
+
+const Div = styled.div`
+  width: 100%;
+  height: 29px;
+  font-family: "Lexend Deca";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22.976px;
+  line-height: 29px;
+  color: #126ba5;
 `;
 
 export default Hoje;
