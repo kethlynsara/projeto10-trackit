@@ -23,8 +23,6 @@ function Habitos() {
   const [etapa, setEtapa] = useState(false);
   const [lista, setLista] = useState([]);
   const { token, setToken, img, setImg } = useContext(UserContext);
-  console.log(img);
-  console.log("habitos", token);
 
   const config = {
     headers: {
@@ -40,7 +38,6 @@ function Habitos() {
     promise.then((response) => {
       const { data } = response;
       setLista(data);
-      console.log(data);
     });
     promise.catch((err) => console.log(err.response));
   }
@@ -58,7 +55,6 @@ function Habitos() {
     );
     promise.then((response) => {
       const { data } = response;
-      console.log("post", data);
       setEtapa(false);
       setName("");
       setSemana([]);
@@ -246,10 +242,8 @@ function Habitos() {
       );
     }
   }
-
+  
   const criacaoHabitos = criarHabito();
-  console.log("input", name);
-  console.log(semana);
 
   if (lista.length === 0) {
     return (

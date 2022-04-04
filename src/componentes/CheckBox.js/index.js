@@ -7,7 +7,6 @@ function CheckBox({selected, marcarHabito, item, grey, green, setSelected, id}) 
       selecionado={item.done ? green : grey}
       onClick={() => {
         setSelected(!selected);
-        console.log("selected", selected);
         marcarHabito(item.id, item.done);
       }}
     >

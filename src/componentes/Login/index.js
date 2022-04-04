@@ -11,7 +11,6 @@ import logo from "../../assets/img/logo.png";
 
 function Login() {
   const { token, setToken, img, setImg } = useContext(UserContext);
-  // const [img, setImg] = useContext(UserContext);
   const [inputOn, setInputOn] = useState(false);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -33,16 +32,12 @@ function Login() {
       setToken(data.token);
       setImg(data.image);
       setLoading(false);
-      console.log("token", data.token);
-      console.log(data);
-      console.log("deu bom");
       navigate("/hoje");
     });
     promise.catch((err) => {
       alert("Algo de errado não está certo, try again :(");
       setEmail("");
       setSenha("");
-      console.log("deu ruim", err.response);
       setInputOn(false);
       setLoading(false);
     });

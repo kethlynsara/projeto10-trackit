@@ -42,27 +42,12 @@ function Hoje() {
     );
     promise.then((response) => {
       const { data } = response;
-      console.log(data);
       const porcentagem = (
-        (list.filter((habito) => habito.done).length / list.length) *
+        (data.filter((habito) => habito.done).length / data.length) *
         100
       )
       setPercentage(porcentagem);
-      setList(data);
-      // if (list.length > 0) {
-      //   const porcentagem = (
-      //     (list.filter((habito) => habito.done).length / list.length) *
-      //     100
-      //   )
-      //   setPercentage(porcentagem);
-      //   console.log(porcentagem);
-      // } else {
-      //   const porcentagem = 0;
-      //   setPercentage(porcentagem);
-      //   console.log(porcentagem);
-      // }
-     
-      
+      setList(data);    
       
     });
     promise.catch((err) => console.log(err.response));
@@ -79,7 +64,6 @@ function Hoje() {
       );
       promise.then((response) => {
         const { data } = response;
-        console.log("deu certo", data);
         setAtualizarHabitos(atualizarHabitos + 1);
       });
     } else {
@@ -90,7 +74,6 @@ function Hoje() {
       );
       promise.then((response) => {
         const { data } = response;
-        console.log("deu bom", data);
         setAtualizarHabitos(atualizarHabitos + 1);
       });
     }

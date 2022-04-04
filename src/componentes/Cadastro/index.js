@@ -11,7 +11,6 @@ function Cadastro() {
   const [senha, setSenha] = useState("");
   const [nome, setNome] = useState("");
   const [foto, setFoto] = useState("");
-  //const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   function cadastrar(event) {
@@ -30,8 +29,6 @@ function Cadastro() {
     promise.then((response) => {
       const { data } = response;
       setLoading(false);
-      console.log(data);
-      //navigate("/");
     });
     promise.catch((err) => {
       alert("Tente se cadastrar novamente");
@@ -41,7 +38,6 @@ function Cadastro() {
       setEmail("");
       setFoto("");
       setLoading(false);
-      console.log(err.response.data);
     });
   }
 
