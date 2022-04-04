@@ -18,6 +18,7 @@ function Hoje() {
   const [atualizarHabitos, setAtualizarHabitos] = useState(0);
   const green = "#8FC549";
   const grey = "#BABABA";
+  const darkGrey = "#666666";
   const days = [
     "Domingo",
     "Segunda",
@@ -97,6 +98,30 @@ function Hoje() {
     );
   }
 
+  function marcarSequencia(currentSequence, highestSequence, done) {
+    if (done) {
+      return (
+        <>
+          <H5 color={green}>
+            Sequência atual: <span>{currentSequence}</span> <span>{currentSequence === 1 ? "dia" : "dias"}</span>
+          </H5>
+          <H6 color={currentSequence === highestSequence ? green : darkGrey}>Seu record: <span>{highestSequence}</span> <span>{highestSequence === 1 ? "dia" : "dias"}</span>
+          </H6>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <H5 color={darkGrey}>
+            Sequência atual: <span>{currentSequence}</span> <span>{currentSequence === 1 ? "dia" : "dias"}</span>
+          </H5>
+          <H6 color={darkGrey}>Seu record: <span>{highestSequence}</span> <span>{highestSequence === 1 ? "dia" : "dias"}</span>
+          </H6>
+        </>
+      )
+    }
+  }
+
   return (
     <Body>
       <Header />
@@ -112,10 +137,17 @@ function Hoje() {
             <Habito key={item.name}>
               <div className="habito-info">
                 <h4>{item.name}</h4>
-                <h5>Sequência atual: {item.currentSequence === 1 ? `${item.currentSequence} dia` : `${item.currentSequence} dias`}</h5>
-                <h6>Seu record: {item.highestSequence === 1 ? `${item.highestSequence} dia` : `${item.highestSequence} dias`}</h6>
+                {marcarSequencia(item.currentSequence , item.highestSequence, item.done )}
               </div>
-              <CheckBox selected={selected} setSelected={setSelected} marcarHabito={marcarHabito} item={item} green={green} grey={grey} id={item.id}/>
+              <CheckBox
+                selected={selected}
+                setSelected={setSelected}
+                marcarHabito={marcarHabito}
+                item={item}
+                green={green}
+                grey={grey}
+                id={item.id}
+              />
             </Habito>
           );
         })}
@@ -125,11 +157,19 @@ function Hoje() {
   );
 }
 
+const H5 = styled.h5`
+  span {
+    color: ${(props) => props.color};
+  }
+`;
+
+const H6 = styled.h6`
+  span {
+    color: ${(props) => props.color};
+  }
+`;
 
 const Body = styled.body`
-  /* background-color: #e5e5e5;
-  padding-bottom: 70px;
-  padding-top: 28px; */
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -158,7 +198,7 @@ const H2 = styled.h2`
 const Habito = styled.div`
   width: 340px;
   height: 94px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 5px;
   padding: 13px 13px 12px 15px;
   display: flex;

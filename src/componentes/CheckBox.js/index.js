@@ -9,7 +9,6 @@ function CheckBox({selected, marcarHabito, item, grey, green, setSelected, id}) 
         setSelected(!selected);
         console.log("selected", selected);
         marcarHabito(item.id, item.done);
-        
       }}
     >
       <img src={check} alt={`check icon ${id}`} />
