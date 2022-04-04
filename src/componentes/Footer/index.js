@@ -58,7 +58,7 @@ const Contanier = styled.div`
   justify-content: space-between;
   padding: 22px 31px 0px 36px;
 
-  background-color: #e5e5e5;
+  background-color: #FFFFFF;
 
   button {
     width: 68px;

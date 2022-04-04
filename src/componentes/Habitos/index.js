@@ -183,8 +183,9 @@ function Habitos() {
     return (
       <>
         <Body>
-          <Header />
-          <Descricao>
+          <Div>
+            <Header />
+            <Descricao>
               <h2>Meus hábitos</h2>
               <button
                 onClick={() => {
@@ -196,11 +197,12 @@ function Habitos() {
               </button>
             </Descricao>
             {criacaoHabitos}
-          <P>
-            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
-            começar a trackear!
-          </P>
-          <Footer />
+            <P>
+              Você não tem nenhum hábito cadastrado ainda. Adicione um hábito
+              para começar a trackear!
+            </P>
+            <Footer />
+          </Div>
         </Body>
       </>
     );
@@ -251,19 +253,21 @@ function Habitos() {
   }
 }
 
+const Div = styled.div`
+  padding-left: 17px;
+  padding-right: 20px;
+`;
+
 const P = styled.p`
   font-weight: 400;
   font-size: 19.976px;
   line-height: 25px;
   position: relative;
   top: 13px;
-  left: 15px;
   bottom: 8px;
   color: #666666;
   font-family: "Lexend Deca";
-  padding-left: 17px;
-  padding-right: 18px;
-  margin-top: 70px;
+  margin-top: 28px;
 `;
 
 const Habito = styled.div`
@@ -302,7 +306,6 @@ const Habito = styled.div`
     font-weight: 400;
     font-size: 19.976px;
     line-height: 25px;
-    border: none;
   }
 `;
 
@@ -310,7 +313,8 @@ const Contanier = styled.div`
   font-family: "Lexend Deca";
   padding-left: 17px;
   padding-right: 18px;
-  margin-bottom: 100px;
+  margin-bottom: 130px;
+  
 
   p {
     font-style: normal;
@@ -357,8 +361,7 @@ const Cadastro = styled.div`
   width: 340px;
   height: 180px;
   border-radius: 5px;
-  /* background-color: salmon; */
-  background-color: #e5e5e5;
+  background-color: #ffffff;
   padding: 18px 18px 15px 19px;
   margin-top: 20px;
 
@@ -370,7 +373,6 @@ const Cadastro = styled.div`
     border-radius: 5px;
     margin-bottom: 10px;
     padding-left: 11px;
-    border: 1px #d4d4d4;
   }
 
   input::placeholder {
@@ -389,12 +391,16 @@ const Cadastro = styled.div`
     box-sizing: border-box;
     border-radius: 5px;
     margin-right: 4px;
-    border: none;
+    color: #dbdbdb;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19.976px;
+    line-height: 25px;
   }
 
   .salvar-cancelar {
     margin-top: 50px;
-    margin-left: 140px;
+    margin-left: 160px;
   }
 
   .salvar {
@@ -420,20 +426,18 @@ const Cadastro = styled.div`
     text-align: center;
     color: #52b6ff;
     border: none;
+    background-color: #ffffff;
   }
 `;
 
-// const Cabecalho = styled.header`
-//   background-color: #e5e5e5;
-// `;
-
-
 const Body = styled.body`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
   background-color: #e5e5e5;
+  padding-bottom: 70px;
+  padding-top: 28px;
+  overflow-y: scroll;
 `;
-
-// const Base = styled.footer`
-//   background-color: #e5e5e5;
-// `;
 
 export default Habitos;

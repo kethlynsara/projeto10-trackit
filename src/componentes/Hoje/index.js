@@ -6,13 +6,15 @@ import dayjs from "dayjs";
 
 import Header from "../Header";
 import Footer from "../Footer";
-import check from "../../assets/img/check.svg";
+import CheckBox from "../CheckBox.js";
 import UserContext from "../../contexts/UserContext";
+
+import check from "../../assets/img/check.svg";
 
 function Hoje() {
   const { token, percentage, setPercentage } = useContext(UserContext);
   const [list, setList] = useState([]);
-  const [selected, setSelected] = useState(true);
+  const [selected, setSelected] = useState(false);
   const [atualizarHabitos, setAtualizarHabitos] = useState(0);
   const green = "#8FC549";
   const grey = "#BABABA";
@@ -43,7 +45,7 @@ function Hoje() {
       const porcentagem = (
         (data.filter((habito) => habito.done).length / data.length) *
         100
-      ).toFixed(2);
+      ).toFixed(0);
       setList(data);
       setPercentage(porcentagem);
       console.log(porcentagem);
@@ -85,7 +87,7 @@ function Hoje() {
         {days.map((day) => {
           if (days.indexOf(day) == dayjs().day()) {
             return (
-              <p>
+              <p key={day}>
                 {day}, {dayjs().format("DD/MM")}
               </p>
             );
@@ -96,7 +98,7 @@ function Hoje() {
   }
 
   return (
-    <>
+    <Body>
       <Header />
       <Contanier>
         {diasSemana()}
@@ -110,41 +112,45 @@ function Hoje() {
             <Habito key={item.name}>
               <div className="habito-info">
                 <h4>{item.name}</h4>
-                <h5>Sequência atual: 4 dias</h5>
-                <h6>Seu record: 5 dias</h6>
+                <h5>Sequência atual: {item.currentSequence === 1 ? `${item.currentSequence} dia` : `${item.currentSequence} dias`}</h5>
+                <h6>Seu record: {item.highestSequence === 1 ? `${item.highestSequence} dia` : `${item.highestSequence} dias`}</h6>
               </div>
-              <div
-                className="check-box"
-                onClick={() => {
-                  setSelected(!selected);
-                  marcarHabito(item.id, item.done);
-                  console.log("selected", selected);
-                }}
-              >
-                <img src={check} alt="check icon" />
-              </div>
+              <CheckBox selected={selected} setSelected={setSelected} marcarHabito={marcarHabito} item={item} green={green} grey={grey}/>
             </Habito>
           );
         })}
       </Contanier>
       <Footer />
-    </>
+    </Body>
   );
 }
+
+
+const Body = styled.body`
+  /* background-color: #e5e5e5;
+  padding-bottom: 70px;
+  padding-top: 28px; */
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #e5e5e5;
+  padding-bottom: 70px;
+  padding-top: 28px;
+  overflow-y: scroll;
+`;
 
 const Contanier = styled.div`
   font-family: "Lexend Deca", sans-serif;
   margin-top: 80px;
   padding-left: 17px;
   padding-right: 18px;
-  margin-bottom: 100px;
+  margin-bottom: 130px;
 `;
 
 const H2 = styled.h2`
   font-weight: 400;
   font-size: 17.976px;
   line-height: 22px;
-  margin-top: 127px;
   margin-bottom: 28px;
   color: ${(props) => props.color};
 `;
@@ -152,7 +158,7 @@ const H2 = styled.h2`
 const Habito = styled.div`
   width: 340px;
   height: 94px;
-  background-color: salmon;
+  background-color: #FFFFFF;
   border-radius: 5px;
   padding: 13px 13px 12px 15px;
   display: flex;
@@ -180,18 +186,6 @@ const Habito = styled.div`
     color: #666666;
   }
 
-  .check-box {
-    width: 69px;
-    height: 69px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ebebeb;
-    border: 1px solid #e7e7e7;
-    box-sizing: border-box;
-    border-radius: 5px;
-  }
-
   .check-box img {
     height: 28px;
     width: 35.09282684326172px;
@@ -210,54 +204,3 @@ const Div = styled.div`
 `;
 
 export default Hoje;
-
-// if (selected) {
-//   if (done === false) {
-//     const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, {}, config);
-//     promise.then((response) => {
-//       const {data} = response;
-//       console.log("deu bom", data);
-//     });
-//     promise.catch((err) => console.log("não deu bom", err.response));
-//     // console.log(setFilter(("filter", list.filter((habito) => habito.done === true))));
-//   } else {
-//     const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, {}, config);
-//     promise.then((response) => {
-//       const {data} = response;
-//       console.log("deu certo", data);
-//     });
-//     promise.catch((err) => console.log("não deu certo", err.response));
-//     // console.log(setFilter(("filter", list.filter((habito) => habito.done === true))));
-//   }
-// } else {
-//   if (done === true) {
-//     const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, {}, config);
-//     promise.then((response) => {
-//       const {data} = response;
-//       console.log("deu certo", data);
-//     });
-//     promise.catch((err) => console.log("não deu certo", err.response));
-//     // console.log(setFilter(("filter", list.filter((habito) => habito.done === true))));
-//   }
-// }
-
-// const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, {}, config);
-// promise.then((response) => {
-// const {data} = response;
-// console.log("deu bom", data);
-// });
-// promise.catch((err) => console.log("não deu bom", err.response));
-// } else if (selected && done) {
-//   const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, {}, config);
-//   promise.then((response) => {
-//   const {data} = response;
-//   console.log("deu certo", data);
-//   });
-//   promise.catch((err) => console.log("não deu certo", err.response));
-// } else if (!selected && done) {
-//   const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, {}, config);
-//   promise.then((response) => {
-//   const {data} = response;
-//   console.log("deu certo", data);
-//   });
-//   promise.catch((err) => console.log("não deu certo", err.response));
