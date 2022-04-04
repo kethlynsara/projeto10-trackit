@@ -291,13 +291,13 @@ function Habitos() {
                   ></ion-icon>
                   <p>{item.name}</p>
                   <div className="dias">
-                    <button>D</button>
-                    <button>S</button>
-                    <button>T</button>
-                    <button>Q</button>
-                    <button>Q</button>
-                    <button>S</button>
-                    <button>S</button>
+                    <Domingo background={item.days.includes(0) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(0) ? "#FFFFFF" : "#CFCFCF"}>D</Domingo>
+                    <Segunda background={item.days.includes(1) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(1) ? "#FFFFFF" : "#CFCFCF"}>S</Segunda>
+                    <Terca background={item.days.includes(2) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(2) ? "#FFFFFF" : "#CFCFCF"}>T</Terca>
+                    <Quarta background={item.days.includes(3) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(3) ? "#FFFFFF" : "#CFCFCF"}>Q</Quarta>
+                    <Quinta background={item.days.includes(4) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(4) ? "#FFFFFF" : "#CFCFCF"}>Q</Quinta>
+                    <Sexta background={item.days.includes(5) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(5) ? "#FFFFFF" : "#CFCFCF"}>S</Sexta>
+                    <Sabado background={item.days.includes(6) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(6) ? "#FFFFFF" : "#CFCFCF"}>S</Sabado>
                   </div>
                 </Habito>
               );
@@ -349,9 +349,11 @@ const Habito = styled.div`
     bottom: 15px;
     left: 14px;
     top: -42px;
+    display: flex;
   }
 
-  .dias button {
+
+  /* .dias button {
     width: 30px;
     height: 30px;
     margin-right: 4px;
@@ -364,7 +366,7 @@ const Habito = styled.div`
     font-weight: 400;
     font-size: 19.976px;
     line-height: 25px;
-  }
+  } */
 `;
 
 const Contanier = styled.div`
