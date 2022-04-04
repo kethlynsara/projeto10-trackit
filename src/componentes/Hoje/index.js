@@ -44,12 +44,26 @@ function Hoje() {
       const { data } = response;
       console.log(data);
       const porcentagem = (
-        (data.filter((habito) => habito.done).length / data.length) *
+        (list.filter((habito) => habito.done).length / list.length) *
         100
-      ).toFixed(0);
-      setList(data);
+      )
       setPercentage(porcentagem);
-      console.log(porcentagem);
+      setList(data);
+      // if (list.length > 0) {
+      //   const porcentagem = (
+      //     (list.filter((habito) => habito.done).length / list.length) *
+      //     100
+      //   )
+      //   setPercentage(porcentagem);
+      //   console.log(porcentagem);
+      // } else {
+      //   const porcentagem = 0;
+      //   setPercentage(porcentagem);
+      //   console.log(porcentagem);
+      // }
+     
+      
+      
     });
     promise.catch((err) => console.log(err.response));
   }
@@ -103,9 +117,12 @@ function Hoje() {
       return (
         <>
           <H5 color={green}>
-            Sequência atual: <span>{currentSequence}</span> <span>{currentSequence === 1 ? "dia" : "dias"}</span>
+            Sequência atual: <span>{currentSequence}</span>{" "}
+            <span>{currentSequence === 1 ? "dia" : "dias"}</span>
           </H5>
-          <H6 color={currentSequence === highestSequence ? green : darkGrey}>Seu record: <span>{highestSequence}</span> <span>{highestSequence === 1 ? "dia" : "dias"}</span>
+          <H6 color={currentSequence === highestSequence ? green : darkGrey}>
+            Seu record: <span>{highestSequence}</span>{" "}
+            <span>{highestSequence === 1 ? "dia" : "dias"}</span>
           </H6>
         </>
       );
@@ -113,12 +130,15 @@ function Hoje() {
       return (
         <>
           <H5 color={darkGrey}>
-            Sequência atual: <span>{currentSequence}</span> <span>{currentSequence === 1 ? "dia" : "dias"}</span>
+            Sequência atual: <span>{currentSequence}</span>{" "}
+            <span>{currentSequence === 1 ? "dia" : "dias"}</span>
           </H5>
-          <H6 color={darkGrey}>Seu record: <span>{highestSequence}</span> <span>{highestSequence === 1 ? "dia" : "dias"}</span>
+          <H6 color={darkGrey}>
+            Seu record: <span>{highestSequence}</span>{" "}
+            <span>{highestSequence === 1 ? "dia" : "dias"}</span>
           </H6>
         </>
-      )
+      );
     }
   }
 
@@ -137,7 +157,11 @@ function Hoje() {
             <Habito key={item.name}>
               <div className="habito-info">
                 <h4>{item.name}</h4>
-                {marcarSequencia(item.currentSequence , item.highestSequence, item.done )}
+                {marcarSequencia(
+                  item.currentSequence,
+                  item.highestSequence,
+                  item.done
+                )}
               </div>
               <CheckBox
                 selected={selected}

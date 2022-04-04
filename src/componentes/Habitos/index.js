@@ -85,8 +85,10 @@ function Habitos() {
             onChange={(e) => setName(e.target.value)}
           ></input>
           <div className="dias">
-            <Domingo background={domingo ? "#CFCFCF" : "#ffffff"} color={domingo ? "#ffffff": "#CFCFCF" }
-              onClick={() => {                
+            <Domingo
+              background={domingo ? "#CFCFCF" : "#ffffff"}
+              color={domingo ? "#ffffff" : "#CFCFCF"}
+              onClick={() => {
                 setDomingo(!domingo);
                 let index = aux.indexOf(0);
                 if (!domingo) {
@@ -100,9 +102,11 @@ function Habitos() {
             >
               D
             </Domingo>
-            <Segunda background={segunda ? "#CFCFCF" : "#ffffff"} color={segunda ? "#ffffff": "#CFCFCF" }
+            <Segunda
+              background={segunda ? "#CFCFCF" : "#ffffff"}
+              color={segunda ? "#ffffff" : "#CFCFCF"}
               onClick={() => {
-                setSegunda(!segunda);                
+                setSegunda(!segunda);
                 let index = aux.indexOf(1);
 
                 if (!segunda) {
@@ -116,7 +120,9 @@ function Habitos() {
             >
               S
             </Segunda>
-            <Terca background={terca ? "#CFCFCF" : "#ffffff"} color={terca ? "#ffffff": "#CFCFCF" }
+            <Terca
+              background={terca ? "#CFCFCF" : "#ffffff"}
+              color={terca ? "#ffffff" : "#CFCFCF"}
               onClick={() => {
                 setTerca(!terca);
                 let index = aux.indexOf(2);
@@ -131,7 +137,9 @@ function Habitos() {
             >
               T
             </Terca>
-            <Quarta background={quarta ? "#CFCFCF" : "#ffffff"} color={quarta ? "#ffffff": "#CFCFCF" }
+            <Quarta
+              background={quarta ? "#CFCFCF" : "#ffffff"}
+              color={quarta ? "#ffffff" : "#CFCFCF"}
               onClick={() => {
                 setQuarta(!quarta);
                 let index = aux.indexOf(3);
@@ -146,7 +154,9 @@ function Habitos() {
             >
               Q
             </Quarta>
-            <Quinta background={quinta ? "#CFCFCF" : "#ffffff"} color={quinta ? "#ffffff": "#CFCFCF" }
+            <Quinta
+              background={quinta ? "#CFCFCF" : "#ffffff"}
+              color={quinta ? "#ffffff" : "#CFCFCF"}
               onClick={() => {
                 setQuinta(!quinta);
                 let index = aux.indexOf(4);
@@ -161,7 +171,9 @@ function Habitos() {
             >
               Q
             </Quinta>
-            <Sexta background={sexta ? "#CFCFCF" : "#ffffff"} color={sexta ? "#ffffff": "#CFCFCF" }
+            <Sexta
+              background={sexta ? "#CFCFCF" : "#ffffff"}
+              color={sexta ? "#ffffff" : "#CFCFCF"}
               onClick={() => {
                 setSexta(!sexta);
                 let index = aux.indexOf(5);
@@ -176,7 +188,9 @@ function Habitos() {
             >
               S
             </Sexta>
-            <Sabado background={sabado ? "#CFCFCF" : "#ffffff"} color={sabado ? "#ffffff": "#CFCFCF" }
+            <Sabado
+              background={sabado ? "#CFCFCF" : "#ffffff"}
+              color={sabado ? "#ffffff" : "#CFCFCF"}
               onClick={() => {
                 setSabado(!sabado);
                 let index = aux.indexOf(6);
@@ -291,13 +305,48 @@ function Habitos() {
                   ></ion-icon>
                   <p>{item.name}</p>
                   <div className="dias">
-                    <Domingo background={item.days.includes(0) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(0) ? "#FFFFFF" : "#CFCFCF"}>D</Domingo>
-                    <Segunda background={item.days.includes(1) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(1) ? "#FFFFFF" : "#CFCFCF"}>S</Segunda>
-                    <Terca background={item.days.includes(2) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(2) ? "#FFFFFF" : "#CFCFCF"}>T</Terca>
-                    <Quarta background={item.days.includes(3) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(3) ? "#FFFFFF" : "#CFCFCF"}>Q</Quarta>
-                    <Quinta background={item.days.includes(4) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(4) ? "#FFFFFF" : "#CFCFCF"}>Q</Quinta>
-                    <Sexta background={item.days.includes(5) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(5) ? "#FFFFFF" : "#CFCFCF"}>S</Sexta>
-                    <Sabado background={item.days.includes(6) ? "#CFCFCF" : "#FFFFFF"} color={item.days.includes(6) ? "#FFFFFF" : "#CFCFCF"}>S</Sabado>
+                    <Domingo
+                      background={item.days.includes(0) ? "#CFCFCF" : "#FFFFFF"}
+                      color={item.days.includes(0) ? "#FFFFFF" : "#CFCFCF"}
+                    >
+                      D
+                    </Domingo>
+                    <Segunda
+                      background={item.days.includes(1) ? "#CFCFCF" : "#FFFFFF"}
+                      color={item.days.includes(1) ? "#FFFFFF" : "#CFCFCF"}
+                    >
+                      S
+                    </Segunda>
+                    <Terca
+                      background={item.days.includes(2) ? "#CFCFCF" : "#FFFFFF"}
+                      color={item.days.includes(2) ? "#FFFFFF" : "#CFCFCF"}
+                    >
+                      T
+                    </Terca>
+                    <Quarta
+                      background={item.days.includes(3) ? "#CFCFCF" : "#FFFFFF"}
+                      color={item.days.includes(3) ? "#FFFFFF" : "#CFCFCF"}
+                    >
+                      Q
+                    </Quarta>
+                    <Quinta
+                      background={item.days.includes(4) ? "#CFCFCF" : "#FFFFFF"}
+                      color={item.days.includes(4) ? "#FFFFFF" : "#CFCFCF"}
+                    >
+                      Q
+                    </Quinta>
+                    <Sexta
+                      background={item.days.includes(5) ? "#CFCFCF" : "#FFFFFF"}
+                      color={item.days.includes(5) ? "#FFFFFF" : "#CFCFCF"}
+                    >
+                      S
+                    </Sexta>
+                    <Sabado
+                      background={item.days.includes(6) ? "#CFCFCF" : "#FFFFFF"}
+                      color={item.days.includes(6) ? "#FFFFFF" : "#CFCFCF"}
+                    >
+                      S
+                    </Sabado>
                   </div>
                 </Habito>
               );
@@ -351,22 +400,6 @@ const Habito = styled.div`
     top: -42px;
     display: flex;
   }
-
-
-  /* .dias button {
-    width: 30px;
-    height: 30px;
-    margin-right: 4px;
-    background: #ffffff;
-    border: 1px solid #d5d5d5;
-    box-sizing: border-box;
-    border-radius: 5px;
-    color: #dbdbdb;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19.976px;
-    line-height: 25px;
-  } */
 `;
 
 const Contanier = styled.div`
@@ -441,9 +474,9 @@ const Cadastro = styled.div`
     line-height: 25px;
     color: #dbdbdb;
   }
-  
+
   .dias {
-    display: flex;  
+    display: flex;
   }
 
   .dias button {
@@ -494,13 +527,14 @@ const Cadastro = styled.div`
 `;
 
 const Domingo = styled.div`
+  font-family: "Lexend Deca";
   background-color: ${(props) => props.background};
   width: 30px;
   height: 30px;
   border: 1px solid #d5d5d5;
   box-sizing: border-box;
   border-radius: 5px;
-  color: ${(props) => props.color};;
+  color: ${(props) => props.color};
   font-style: normal;
   font-weight: 400;
   font-size: 19.976px;
@@ -510,6 +544,7 @@ const Domingo = styled.div`
 `;
 
 const Segunda = styled.div`
+  font-family: "Lexend Deca";
   background-color: ${(props) => props.background};
   width: 30px;
   height: 30px;
@@ -526,6 +561,7 @@ const Segunda = styled.div`
 `;
 
 const Terca = styled.div`
+  font-family: "Lexend Deca";
   background-color: ${(props) => props.background};
   width: 30px;
   height: 30px;
@@ -542,13 +578,15 @@ const Terca = styled.div`
 `;
 
 const Quarta = styled.div`
+  font-family: "Lexend Deca";
   background-color: ${(props) => props.background};
   width: 30px;
   height: 30px;
   border: 1px solid #d5d5d5;
   box-sizing: border-box;
   border-radius: 5px;
-  color: ${(props) => props.color};  font-style: normal;
+  color: ${(props) => props.color};
+  font-style: normal;
   font-weight: 400;
   font-size: 19.976px;
   line-height: 25px;
@@ -557,13 +595,15 @@ const Quarta = styled.div`
 `;
 
 const Quinta = styled.div`
+  font-family: "Lexend Deca";
   background-color: ${(props) => props.background};
   width: 30px;
   height: 30px;
   border: 1px solid #d5d5d5;
   box-sizing: border-box;
   border-radius: 5px;
-  color: ${(props) => props.color};  font-style: normal;
+  color: ${(props) => props.color};
+  font-style: normal;
   font-weight: 400;
   font-size: 19.976px;
   line-height: 25px;
@@ -572,13 +612,15 @@ const Quinta = styled.div`
 `;
 
 const Sexta = styled.div`
+  font-family: "Lexend Deca";
   background-color: ${(props) => props.background};
   width: 30px;
   height: 30px;
   border: 1px solid #d5d5d5;
   box-sizing: border-box;
   border-radius: 5px;
-  color: ${(props) => props.color};  font-style: normal;
+  color: ${(props) => props.color};
+  font-style: normal;
   font-weight: 400;
   font-size: 19.976px;
   line-height: 25px;
@@ -587,19 +629,20 @@ const Sexta = styled.div`
 `;
 
 const Sabado = styled.div`
+  font-family: "Lexend Deca";
   background-color: ${(props) => props.background};
   width: 30px;
   height: 30px;
   border: 1px solid #d5d5d5;
   box-sizing: border-box;
   border-radius: 5px;
-  color: ${(props) => props.color};  font-style: normal;
+  color: ${(props) => props.color};
+  font-style: normal;
   font-weight: 400;
   font-size: 19.976px;
   line-height: 25px;
   margin-right: 4px;
   text-align: center;
-
 `;
 
 const Body = styled.body`
