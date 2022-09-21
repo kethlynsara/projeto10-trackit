@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react/cjs/react.development";
+import { useState }  from "react";
 
 import Login from "../Login";
 import Cadastro from "../Cadastro";
