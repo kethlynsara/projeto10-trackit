@@ -1,11 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 
 import Header from "../Header";
 import Footer from "../Footer";
 import UserContext from "../../contexts/UserContext";
 import axios from "axios";
-import { useState }  from "react";
 
 function Habitos() {
   const [domingo, setDomingo] = useState(false);

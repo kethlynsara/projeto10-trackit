@@ -10,7 +10,6 @@ import UserContext from "../../contexts/UserContext";
 
 import "../../assets/css/reset.css";
 
-
 function App() {
     const [token, setToken] = useState("");
     const [img, setImg] = useState("");

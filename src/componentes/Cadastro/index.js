@@ -1,9 +1,10 @@
-import styled from "styled-components";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-import logo from "../../assets/img/logo.png";
-import { useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
+
+import logo from "../../assets/img/logo.png";
 
 function Cadastro() {
   const [inputOn, setInputOn] = useState(false);
