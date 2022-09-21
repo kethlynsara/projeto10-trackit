@@ -1,7 +1,6 @@
 import { useContext } from "react/cjs/react.development";
 import styled from "styled-components";
 import UserContext from "../../contexts/UserContext";
-// import bob from "../../assets/img/bob.png";
 
 
 function Header({usuario}) {

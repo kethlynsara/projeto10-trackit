@@ -5,7 +5,7 @@ import Header from "../Header";
 import Footer from "../Footer";
 import UserContext from "../../contexts/UserContext";
 import axios from "axios";
-import { useState } from "react/cjs/react.development";
+import { useState }  from "react";
 
 function Habitos() {
   const [domingo, setDomingo] = useState(false);

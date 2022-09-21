@@ -1,8 +1,7 @@
 import axios from "axios";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react/cjs/react.development";
 import { ThreeDots } from "react-loader-spinner";
 
 import UserContext from "../../contexts/UserContext";
