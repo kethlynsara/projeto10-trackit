@@ -277,74 +277,75 @@ function Habitos() {
         <Body>
           <Contanier>
             <Header />
-            <Descricao>
-              <h2>Meus hábitos</h2>
-              <button
-                onClick={() => {
-                  setEtapa(true);
-                  criarHabito();
-                }}
-              >
-                +
-              </button>
-            </Descricao>
-            {criacaoHabitos}
-            {lista.map((item) => {
-              return (
-                <Habito key={item.name}>
-                  <ion-icon
-                    name="trash-outline"
-                    onClick={() => deletar(item.id)}
-                  ></ion-icon>
-                  <p>{item.name}</p>
-                  <div className="dias">
-                    <Domingo
-                      background={item.days.includes(0) ? "#CFCFCF" : "#FFFFFF"}
-                      color={item.days.includes(0) ? "#FFFFFF" : "#CFCFCF"}
-                    >
-                      D
-                    </Domingo>
-                    <Segunda
-                      background={item.days.includes(1) ? "#CFCFCF" : "#FFFFFF"}
-                      color={item.days.includes(1) ? "#FFFFFF" : "#CFCFCF"}
-                    >
-                      S
-                    </Segunda>
-                    <Terca
-                      background={item.days.includes(2) ? "#CFCFCF" : "#FFFFFF"}
-                      color={item.days.includes(2) ? "#FFFFFF" : "#CFCFCF"}
-                    >
-                      T
-                    </Terca>
-                    <Quarta
-                      background={item.days.includes(3) ? "#CFCFCF" : "#FFFFFF"}
-                      color={item.days.includes(3) ? "#FFFFFF" : "#CFCFCF"}
-                    >
-                      Q
-                    </Quarta>
-                    <Quinta
-                      background={item.days.includes(4) ? "#CFCFCF" : "#FFFFFF"}
-                      color={item.days.includes(4) ? "#FFFFFF" : "#CFCFCF"}
-                    >
-                      Q
-                    </Quinta>
-                    <Sexta
-                      background={item.days.includes(5) ? "#CFCFCF" : "#FFFFFF"}
-                      color={item.days.includes(5) ? "#FFFFFF" : "#CFCFCF"}
-                    >
-                      S
-                    </Sexta>
-                    <Sabado
-                      background={item.days.includes(6) ? "#CFCFCF" : "#FFFFFF"}
-                      color={item.days.includes(6) ? "#FFFFFF" : "#CFCFCF"}
-                    >
-                      S
-                    </Sabado>
-                  </div>
-                </Habito>
-              );
-            })}
-
+            <Box>
+              <Descricao>
+                <h2>Meus hábitos</h2>
+                <button
+                  onClick={() => {
+                    setEtapa(true);
+                    criarHabito();
+                  }}
+                >
+                  +
+                </button>
+              </Descricao>
+              {criacaoHabitos}
+              {lista.map((item) => {
+                return (
+                  <Habito key={item.name}>
+                    <ion-icon
+                      name="trash-outline"
+                      onClick={() => deletar(item.id)}
+                    ></ion-icon>
+                    <p>{item.name}</p>
+                    <div className="dias">
+                      <Domingo
+                        background={item.days.includes(0) ? "#CFCFCF" : "#FFFFFF"}
+                        color={item.days.includes(0) ? "#FFFFFF" : "#CFCFCF"}
+                      >
+                        D
+                      </Domingo>
+                      <Segunda
+                        background={item.days.includes(1) ? "#CFCFCF" : "#FFFFFF"}
+                        color={item.days.includes(1) ? "#FFFFFF" : "#CFCFCF"}
+                      >
+                        S
+                      </Segunda>
+                      <Terca
+                        background={item.days.includes(2) ? "#CFCFCF" : "#FFFFFF"}
+                        color={item.days.includes(2) ? "#FFFFFF" : "#CFCFCF"}
+                      >
+                        T
+                      </Terca>
+                      <Quarta
+                        background={item.days.includes(3) ? "#CFCFCF" : "#FFFFFF"}
+                        color={item.days.includes(3) ? "#FFFFFF" : "#CFCFCF"}
+                      >
+                        Q
+                      </Quarta>
+                      <Quinta
+                        background={item.days.includes(4) ? "#CFCFCF" : "#FFFFFF"}
+                        color={item.days.includes(4) ? "#FFFFFF" : "#CFCFCF"}
+                      >
+                        Q
+                      </Quinta>
+                      <Sexta
+                        background={item.days.includes(5) ? "#CFCFCF" : "#FFFFFF"}
+                        color={item.days.includes(5) ? "#FFFFFF" : "#CFCFCF"}
+                      >
+                        S
+                      </Sexta>
+                      <Sabado
+                        background={item.days.includes(6) ? "#CFCFCF" : "#FFFFFF"}
+                        color={item.days.includes(6) ? "#FFFFFF" : "#CFCFCF"}
+                      >
+                        S
+                      </Sabado>
+                    </div>
+                  </Habito>
+                );
+              })}
+            </Box>
             <Footer />
           </Contanier>
         </Body>
@@ -352,6 +353,12 @@ function Habitos() {
     );
   }
 }
+
+const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Div = styled.div`
   padding-left: 17px;
@@ -419,6 +426,7 @@ const Descricao = styled.div`
   display: flex;
   justify-content: space-between;
   font-family: "Lexend Deca";
+  width: 340px;
 
   h2 {
     font-style: normal;

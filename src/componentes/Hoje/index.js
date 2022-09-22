@@ -127,37 +127,41 @@ function Hoje() {
   return (
     <Body>
       <Header />
-      <Contanier>
-        {diasSemana()}
-        <H2 color={percentage > 0 ? green : grey}>
-          {percentage > 0
-            ? `${percentage}% dos hábitos concluídos`
-            : "Nenhum hábito concluído ainda"}
-        </H2>
-        {list.map((item) => {
-          return (
-            <Habito key={item.name}>
-              <div className="habito-info">
-                <h4>{item.name}</h4>
-                {marcarSequencia(
-                  item.currentSequence,
-                  item.highestSequence,
-                  item.done
-                )}
-              </div>
-              <CheckBox
-                selected={selected}
-                setSelected={setSelected}
-                marcarHabito={marcarHabito}
-                item={item}
-                green={green}
-                grey={grey}
-                id={item.id}
-              />
-            </Habito>
-          );
-        })}
-      </Contanier>
+      <Box>
+        <Contanier>
+          <TituloDiv>
+            {diasSemana()}
+            <H2 color={percentage > 0 ? green : grey}>
+              {percentage > 0
+                ? `${percentage}% dos hábitos concluídos`
+                : "Nenhum hábito concluído ainda"}
+            </H2>
+          </TituloDiv>
+          {list.map((item) => {
+            return (
+              <Habito key={item.name}>
+                <div className="habito-info">
+                  <h4>{item.name}</h4>
+                  {marcarSequencia(
+                    item.currentSequence,
+                    item.highestSequence,
+                    item.done
+                  )}
+                </div>
+                <CheckBox
+                  selected={selected}
+                  setSelected={setSelected}
+                  marcarHabito={marcarHabito}
+                  item={item}
+                  green={green}
+                  grey={grey}
+                  id={item.id}
+                />
+              </Habito>
+            );
+          })}
+        </Contanier>
+      </Box>
       <Footer />
     </Body>
   );
@@ -176,18 +180,29 @@ const H6 = styled.h6`
 `;
 
 const Body = styled.body`
-  position: fixed;
   width: 100vw;
   height: 100vh;
   background-color: #e5e5e5;
   padding-bottom: 70px;
   padding-top: 28px;
   overflow-y: scroll;
+  font-family: "Lexend Deca", sans-serif;
+`;
+
+const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const TituloDiv = styled.div`
+  margin-top: 78px;
+  display: flex;
+  flex-direction: column;  
+  height: 80px;
 `;
 
 const Contanier = styled.div`
-  font-family: "Lexend Deca", sans-serif;
-  margin-top: 80px;
   padding-left: 17px;
   padding-right: 18px;
   margin-bottom: 130px;

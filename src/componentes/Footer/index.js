@@ -44,7 +44,7 @@ const Div = styled.div`
   width: 91px;
   height: 91px;
   bottom: 6px;
-  left: 170px;
+  left: 42vw;
 `;
 
 const Contanier = styled.div`
